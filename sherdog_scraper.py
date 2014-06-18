@@ -127,13 +127,3 @@ def main(argv):
 if __name__ == '__main__':
     main(sys.argv)
 
-#list = range(1,100,1)
-#a = build_database(list)
-#try it out
-#t = Timer(lambda: build_database(list))
-#print t.timeit(number=1)
-import boto
-#from boto.s3.connection import S3Connection
-#conn = S3Connection('AKIAIX5HNIB6J2KSJV3A', 'al1jtrWJSdLuR+o4cpOfumU7fBs2g0wxw3hoxflC')
-#bucket = conn.create_bucket('yonaminesherdog')
-#b = conn.get_bucket('yonaminesherdog')
