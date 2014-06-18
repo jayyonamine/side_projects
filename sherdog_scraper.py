@@ -94,27 +94,28 @@ def build_fight_history(num):
 def build_database(list, output_database, output_metadata):
     with open(output_database, 'wb') as f:
         with open(output_metadata, 'wb') as ff:
-            consecutive_fails = 0
-            for l in list:
-                if consecutive_fails < 100:
-                    print l
-                    if l % 100 == 0:
-                        print l
-                        pass
-                    time.sleep(random.uniform(0,2))
-                    try:
-                        fight_history, meta = build_fight_history(l)
-                        consecutive_fails = 0
-                    except:
-                        consecutive_fails += 1
-                        print consecutive_fails
-                        continue
-                    wtr = csv.writer(f, delimiter= ',')
-                    wtr.writerows(fight_history)
-                    wtr_meta = csv.writer(ff, delimiter= ',')
-                    wtr_meta.writerow(meta)
-                else:
-                    break
+            with open('log.txt', 'w') as log:
+                consecutive_fails = 0
+                count = 0
+                for l in list:
+                    if consecutive_fails < 100:
+                        count += 1
+                        print count
+                        #time.sleep(random.uniform(0,2))
+                        try:
+                            fight_history, meta = build_fight_history(l)
+                            consecutive_fails = 0
+                        except:
+                            consecutive_fails += 1
+                            print consecutive_fails
+                            continue
+                        wtr = csv.writer(f, delimiter= ',')
+                        wtr.writerows(fight_history)
+                        wtr_meta = csv.writer(ff, delimiter= ',')
+                        wtr_meta.writerow(meta)
+                        log.write('%s\n' % l)
+                    else:
+                        break
 
 def main(argv):
     list = range(int(argv[1]), int(argv[2]), 1)
